@@ -1,20 +1,22 @@
 
 package corejava;
 
+import java.util.Scanner;
+
 // BankAccount class
 class BankAccount {
 
-    // Static variable: common for all customers
+    // Common bank name
     static String bankName = "ABC Bank";
 
-    // Final variable: account number cannot be changed
+    // Account number cannot be changed
     final int accountNumber;
 
-    // Instance variables: separate for every customer
+    // Individual account details
     String accountHolder;
     double balance;
 
-    // Constructor to initialize account details
+    // Constructor
     BankAccount(String accountHolder, int accountNumber, double balance) {
 
         this.accountHolder = accountHolder;
@@ -35,7 +37,7 @@ class BankAccount {
         }
     }
 
-    // Method 2: Deposit amount with transaction description
+    // Method 2: Deposit amount with description
     void deposit(double amount, String description) {
 
         if (amount <= 0) {
@@ -49,7 +51,7 @@ class BankAccount {
         }
     }
 
-    // Method to display account details
+    // Display account details
     void displayDetails() {
 
         System.out.println("Account Holder: " + accountHolder);
@@ -63,30 +65,58 @@ public class BankingSystem {
 
     public static void main(String[] args) {
 
-        // Creating first customer account
-        BankAccount account1 =
-                new BankAccount("Rahul", 1001, 5000.0);
+        Scanner sc = new Scanner(System.in);
 
-        // Creating second customer account
-        BankAccount account2 =
-                new BankAccount("Amit", 1002, 3000.0);
-
-        // Displaying common bank name
+        // Display common bank name
         System.out.println("Bank: " + BankAccount.bankName);
 
-        System.out.println();
+        // First customer account
+        System.out.print("Enter first account holder name: ");
+        String name1 = sc.nextLine();
 
-        // Displaying Rahul's account details
+        System.out.print("Enter first account number: ");
+        int number1 = sc.nextInt();
+
+        System.out.print("Enter first account balance: ");
+        double balance1 = sc.nextDouble();
+
+        BankAccount account1 =
+                new BankAccount(name1, number1, balance1);
+
+        sc.nextLine();
+
+        // Second customer account
+        System.out.print("\nEnter second account holder name: ");
+        String name2 = sc.nextLine();
+
+        System.out.print("Enter second account number: ");
+        int number2 = sc.nextInt();
+
+        System.out.print("Enter second account balance: ");
+        double balance2 = sc.nextDouble();
+
+        BankAccount account2 =
+                new BankAccount(name2, number2, balance2);
+
+        // Display first account details
+        System.out.println("\n" + "Account Details:");
         account1.displayDetails();
 
-        System.out.println();
+        // Deposit with transaction description
+        System.out.print("\nEnter deposit amount for first account: ");
+        double amount1 = sc.nextDouble();
 
-        // Depositing money with transaction description
-        account1.deposit(2000.0, "Salary Credit");
+        sc.nextLine();
 
-        System.out.println();
+        System.out.print("Enter transaction description: ");
+        String description = sc.nextLine();
 
-        // Displaying Amit's account details
+        account1.deposit(amount1, description);
+
+        // Display second account details
+        System.out.println("\nAccount Details:");
         account2.displayDetails();
+
+        sc.close();
     }
 }
